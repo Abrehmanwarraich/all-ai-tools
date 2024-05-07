@@ -1,0 +1,17 @@
+/* scrollbar.css */
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* adjust as needed */
+  }
+  
+  /* Track */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #26C6DA;
+  }
+  
+  /* Handle */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #0f0f0f;
+    border-radius: 9999px; /* Use a large value for maximum roundness */
+  }
+  
