@@ -111,40 +111,40 @@ const Home = () => {
           </div>
           
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
           <div className=" w-80 h-28 bg-black rounded-lg flex flex-col my-2 hover:outline ">
-            <h>aaaaaaaaaaaaaaaaaa</h>
+            <h1>aaaaaaaaaaaaaaaaaa</h1>
           </div>
         </div>
       </div>

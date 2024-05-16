@@ -131,7 +131,7 @@ const Allcategory = () => {
             </li>
           </ol>
 
-          <button className=" w-full rounded-lg mt-0.5 text-sm hover:border-4 border-black bg-cyan-400 border-2 border-b-4 border-black font-bold static bottom-0">
+          <button className=" w-full rounded-lg mt-0.5 text-sm hover:border-4 border-black bg-cyan-400 border-2 border-b-4  font-bold static bottom-0">
             Show All 444
           </button>
         </div>

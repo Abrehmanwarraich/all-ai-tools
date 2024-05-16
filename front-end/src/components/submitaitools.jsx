@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Footer from "./footer";
-import Tinymceeditor from "./tinymceeditor";
+import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 
 const SubmitAiTools = () => {
@@ -17,14 +17,26 @@ const SubmitAiTools = () => {
   const [introduction, setIntroduction] = useState("");
   const [description, setdescription] = useState("");
 
+  const maxLength = 255;
+
   const handleWebsiteLogoChange = (e) => {
     const file = e.target.files[0];
     setWebsiteLogo(file);
   };
 
+  const handleintroductionChange = (event) => {
+    const value = event.target.value;
+    if (value.length <= maxLength) {
+      setIntroduction(value);
+    }
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
+  };
+  const handleDescriptionChange = (content) => {
+    setdescription(content);
   };
 
   const handleTagInputChange = (e) => {
@@ -33,61 +45,70 @@ const SubmitAiTools = () => {
 
   const handleAddTag = () => {
     if (tagInput.trim() !== "") {
-      setTags([...tags, tagInput.trim()]);
-      setTagInput("");
+      if(tags.length < 11){
+        setTags([...tags, tagInput.trim()]);
+        setTagInput("");
+      }
     }
   };
   const handleRemoveTag = (indexToRemove) => {
     setTags(tags.filter((tag, index) => index !== indexToRemove));
   };
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    e.target.reset();
     console.log({
       websiteLogo,
       Name,
       image,
+      link,
+      date,
+      supported,
       category,
       price,
       tags,
       introduction,
       description,
     });
-  
-    
-  const formData = new FormData();
-  // formData.append("websiteLogo", websiteLogo);
-  formData.append("name", Name);
-  // formData.append("link", link);
-  // formData.append("date", date);
-  // formData.append("image", image);
-  // formData.append("category", category);
-  // formData.append("price", price);
-  // formData.append("supported", supported);
-  // formData.append("introduction", introduction);
-  // formData.append("description", description);
 
-  // formData.append("tags", JSON.stringify(tags));
+    const formData = new FormData();
+    formData.append("websiteLogo", websiteLogo);
+    formData.append("name", Name);
+    formData.append("link", link);
+    formData.append("date", date);
+    formData.append("image", image);
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("supported", supported);
+    formData.append("introduction", introduction);
+    formData.append("description", description);
+    const tagsString = JSON.stringify(tags);
+    formData.append("tags", tagsString);
 
-  try {
-    await axios.post("http://localhost:3001/submit", formData);
-    // console.log("Submission successful:", response.data);
-    alert ("Your data succcessful uploaded");
-    // setWebsiteLogo(null);
-    setName("");
-    // setlink("");
-    // setdate("");
-    // setImage(null);
-    // setCategory("");
-    // setPrice("");
-    // setsupported("");
-    // setTags([]);
-    // setTagInput("");
-    // setIntroduction("");
-  } catch (error) {
-    console.error("Error submitting form:", error);
-  }
-};
+    try {
+      await axios.post("http://localhost:3001/submit", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Your data succcessful uploaded");
+      setWebsiteLogo(null);
+      setName("");
+      setlink("");
+      setdate("");
+      setImage(null);
+      setCategory("");
+      setPrice("");
+      setsupported("");
+      setTags([]);
+      setIntroduction("");
+      setdescription("");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error uploading your data. Please try again later.");
+    }
+  };
 
   return (
     <div className=" bg-cyan-400">
@@ -113,14 +134,11 @@ const SubmitAiTools = () => {
             type="file"
             className="bg-black text-white"
             onChange={handleWebsiteLogoChange}
-            
           />
         </div>
         {/* -------------------------type website name */}
         <div className="mb-10">
-          <label
-            className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1"
-          >
+          <label className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1">
             Type Website Name:
           </label>
           <input
@@ -128,7 +146,6 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={Name}
             onChange={(e) => setName(e.target.value)}
-            
           />
         </div>
         {/* -------------------------type website link */}
@@ -145,21 +162,20 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={link}
             onChange={(e) => setlink(e.target.value)}
-            
           />
         </div>
         {/* -------------------------add date */}
         <div className="mb-10">
           <label
             htmlFor="date"
-            className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1"
+            className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1 appearance-none invert-icon"
           >
             Add Uploading Date:
           </label>
           <input
             type="date"
             id="date"
-            className="border border-gray-300 rounded px-4 py-2 w-full "
+            className="border bg-black border-gray-300 rounded px-4 py-2 w-full "
             value={date}
             onChange={(e) => setdate(e.target.value)}
           />
@@ -178,7 +194,6 @@ const SubmitAiTools = () => {
             className="bg-black text-white"
             accept="image/*"
             onChange={handleImageChange}
-            
           />
         </div>
         {/* --------------------------add category */}
@@ -194,7 +209,6 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            
           >
             <option value="disable selector">Select Category</option>
             <option value="a">aaaaaaa</option>
@@ -214,7 +228,6 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            
           >
             <option value=" disable selector">Select Price</option>
             <option value="a">aaaaaaa</option>
@@ -234,7 +247,6 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={supported}
             onChange={(e) => setsupported(e.target.value)}
-            
           >
             <option value=" disable selector">Select platform</option>
             <option value="a">aaaaaaa</option>
@@ -243,19 +255,24 @@ const SubmitAiTools = () => {
         </div>
         {/* ----------------add tags */}
         <div className="mb-10">
-          <label
-            htmlFor="tags"
-            className="block rounded-lg  bg-gray-500 w-32 text-center font-bold mb-1"
-          >
-            Add Tags:
-          </label>
+          <span className="flex item center justify-between">
+            {" "}
+            <label
+              htmlFor="introduction"
+              className="block rounded-lg  bg-gray-500 w-32 text-center font-bold mb-1"
+            >
+              Add Tags:
+            </label>
+            <p className=" text-xs mt-2">
+              {tags.length}/{10} Tags
+            </p>
+          </span>
           <div className="flex items-center">
             <input
               type="text"
               className="border border-gray-300 rounded-l px-4 py-2 flex-1 bg-black text-white"
               value={tagInput}
               onChange={handleTagInputChange}
-            
             />
             <button
               type="button"
@@ -285,20 +302,26 @@ const SubmitAiTools = () => {
         </div>
         {/* -=-------------------------introduction */}
         <div className="mb-10">
-          <label
-            htmlFor="introduction"
-            className="block rounded-lg  bg-gray-500 w-32 text-center font-bold mb-1"
-          >
-            Introduction:
-          </label>
+          <span className="flex item center justify-between">
+            {" "}
+            <label
+              htmlFor="introduction"
+              className="block rounded-lg  bg-gray-500 w-32 text-center font-bold mb-1"
+            >
+              Introduction:
+            </label>
+            <p className=" text-xs mt-2">
+              {introduction.length}/{maxLength} characters
+            </p>
+          </span>
           <textarea
             id="introduction"
             className="border bg-black text-white border-gray-300 rounded px-4 py-2 w-full"
             value={introduction}
-            onChange={(e) => setIntroduction(e.target.value)}
-            
+            onChange={handleintroductionChange}
+            maxLength={maxLength}
             rows="4"
-          ></textarea>
+          />
         </div>
         {/* -------------------------description */}
         <div className="mb-10 ">
@@ -308,9 +331,25 @@ const SubmitAiTools = () => {
           >
             Description:
           </label>
-          <Tinymceeditor 
-          value={description}
-          onChange={(e) => setdescription(e.target.value)}
+          <Editor
+            initialValue="<p>This is the initial content of the editor</p>"
+            apiKey="oxja26fp9aj1li6ihkja5sv5lcokmubxekm4xzcjnyw803t5"
+            textareaName="editorname"
+            onEditorChange={handleDescriptionChange}
+            init={{
+              height: 350,
+              menubar: false,
+              content_style: "body { color: red; }",
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar: `undo redo | formatselect | bold italic backcolor |
+                       alignleft aligncenter alignright alignjustify |
+                       bullist numlist outdent indent | removeformat | help`,
+              content_css: "editorStyles", // Path to your custom theme CSS file
+            }}
           />
         </div>
         <button
