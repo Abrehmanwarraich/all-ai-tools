@@ -24,7 +24,7 @@ const Reviewtools = () => {
 // ----------------fetch data from reviwtools=======================================
   const fetchUploadedData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/fetchsubmit");
+      const response = await axios.get("http://localhost:3001/fetchreviwtools");
       setUploadedData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

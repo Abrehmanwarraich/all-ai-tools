@@ -1,3 +1,21 @@
 input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: white;
 }
+
+
+ /* src/index.css  */
+ .animate-scroll {
+
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(19rem);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+ 

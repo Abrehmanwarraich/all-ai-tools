@@ -86,8 +86,22 @@ app.post(
 
 // ------------------fetch api for reviwtools page --------------from reviwtools table------------------
 
-app.get("/fetchsubmit", (req, res) => {
+app.get("/fetchreviwtools", (req, res) => {
   const sql = "SELECT * FROM reviwtools";
+  con.query(sql, (err, results) => {
+    if (err) {
+      console.error("Error fetching uploaded data:", err);
+      res.status(500).send("Error fetching data from the database");
+    } else {
+      console.log("Fetched data:", results);
+      res.json(results);
+    }
+  });
+});
+// ------------------fetch api for home page --------------from finaltools table------------------
+
+app.get("/fetchfinaltools", (req, res) => {
+  const sql = "SELECT * FROM finaltools";
   con.query(sql, (err, results) => {
     if (err) {
       console.error("Error fetching uploaded data:", err);

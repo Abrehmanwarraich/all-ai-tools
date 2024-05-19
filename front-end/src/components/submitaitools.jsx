@@ -46,7 +46,7 @@ const SubmitAiTools = () => {
 
   const handleAddTag = () => {
     if (tagInput.trim() !== "") {
-      if (tags.length < 11) {
+      if (tags.length < 10) {
         setTags([...tags, tagInput.trim()]);
         setTagInput("");
       }
@@ -282,7 +282,7 @@ const SubmitAiTools = () => {
               className="border border-gray-300 rounded-l px-4 py-2 flex-1 bg-black text-white"
               value={tagInput}
               onChange={handleTagInputChange}
-              required
+              
             />
             <button
               type="button"
