@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Footer from "./footer";
+import "./extra.css";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 
@@ -45,7 +46,7 @@ const SubmitAiTools = () => {
 
   const handleAddTag = () => {
     if (tagInput.trim() !== "") {
-      if(tags.length < 11){
+      if (tags.length < 11) {
         setTags([...tags, tagInput.trim()]);
         setTagInput("");
       }
@@ -134,6 +135,7 @@ const SubmitAiTools = () => {
             type="file"
             className="bg-black text-white"
             onChange={handleWebsiteLogoChange}
+            required
           />
         </div>
         {/* -------------------------type website name */}
@@ -146,6 +148,7 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={Name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
         {/* -------------------------type website link */}
@@ -162,22 +165,24 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={link}
             onChange={(e) => setlink(e.target.value)}
+            required
           />
         </div>
         {/* -------------------------add date */}
         <div className="mb-10">
           <label
             htmlFor="date"
-            className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1 appearance-none invert-icon"
+            className="block rounded-lg  bg-gray-500 w-52 text-center font-bold mb-1"
           >
             Add Uploading Date:
           </label>
           <input
             type="date"
             id="date"
-            className="border bg-black border-gray-300 rounded px-4 py-2 w-full "
+            className="border bg-black border-gray-300 rounded px-4 py-2 w-full  text-white"
             value={date}
             onChange={(e) => setdate(e.target.value)}
+            required
           />
         </div>
         {/* ---------------------upload image */}
@@ -194,6 +199,7 @@ const SubmitAiTools = () => {
             className="bg-black text-white"
             accept="image/*"
             onChange={handleImageChange}
+            required
           />
         </div>
         {/* --------------------------add category */}
@@ -209,6 +215,7 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            required
           >
             <option value="disable selector">Select Category</option>
             <option value="a">aaaaaaa</option>
@@ -228,6 +235,7 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            required
           >
             <option value=" disable selector">Select Price</option>
             <option value="a">aaaaaaa</option>
@@ -247,6 +255,7 @@ const SubmitAiTools = () => {
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={supported}
             onChange={(e) => setsupported(e.target.value)}
+            required
           >
             <option value=" disable selector">Select platform</option>
             <option value="a">aaaaaaa</option>
@@ -273,6 +282,7 @@ const SubmitAiTools = () => {
               className="border border-gray-300 rounded-l px-4 py-2 flex-1 bg-black text-white"
               value={tagInput}
               onChange={handleTagInputChange}
+              required
             />
             <button
               type="button"
@@ -321,6 +331,7 @@ const SubmitAiTools = () => {
             onChange={handleintroductionChange}
             maxLength={maxLength}
             rows="4"
+            required
           />
         </div>
         {/* -------------------------description */}
@@ -332,14 +343,13 @@ const SubmitAiTools = () => {
             Description:
           </label>
           <Editor
-            initialValue="<p>This is the initial content of the editor</p>"
             apiKey="oxja26fp9aj1li6ihkja5sv5lcokmubxekm4xzcjnyw803t5"
             textareaName="editorname"
             onEditorChange={handleDescriptionChange}
-            init={{
+            init={{              
               height: 350,
               menubar: false,
-              content_style: "body { color: red; }",
+              content_style: "body { background-color: black; color: white !important; }",
               plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
