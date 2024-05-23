@@ -225,22 +225,19 @@ const SubmitAiTools = () => {
         {/* --------------add price */}
         <div className="mb-10">
           <label
-            htmlFor="price"
+            htmlFor="name"
             className="block rounded-lg  bg-gray-500 w-32 text-center font-bold mb-1"
           >
-            Add Price:
+            Type Price:
           </label>
-          <select
-            id="price"
+          <input
+            type="text"
+            id="link"
             className="border border-gray-300 rounded px-4 py-2 w-full bg-black text-white"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
-          >
-            <option value=" disable selector">Select Price</option>
-            <option value="a">aaaaaaa</option>
-            <option value="b">bbbbbbbbbb</option>
-          </select>
+          />
         </div>
         {/* --------------add supported  */}
         <div className="mb-10">
@@ -257,9 +254,12 @@ const SubmitAiTools = () => {
             onChange={(e) => setsupported(e.target.value)}
             required
           >
-            <option value=" disable selector">Select platform</option>
-            <option value="a">aaaaaaa</option>
-            <option value="b">bbbbbbbbbb</option>
+             <option value="disabled selected">Select Feature</option>
+            <option value="All">All</option>
+            <option value="Chrome">Chrome</option>
+            <option value="Android">Android</option>
+            <option value="IOS">IOS</option>
+            <option value="GPT">GPT</option>
           </select>
         </div>
         {/* ----------------add tags */}

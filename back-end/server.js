@@ -130,9 +130,56 @@ app.delete("/reviewtools/:id", (req, res) => {
       res.status(200).json({ success: true });
     }
   });
+  });
+
+  // ------------------fetch api for home page --------------from finaltools table------------------
+
+app.get("/fetchsavetools", (req, res) => {
+  const sql = "SELECT * FROM savetools";
+  con.query(sql, (err, results) => {
+    if (err) {
+      console.error("Error fetching uploaded data:", err);
+      res.status(500).send("Error fetching data from the database");
+    } else {
+      console.log("Fetched data:", results);
+      res.json(results);
+    }
+  });
 });
 
-// -------------------------------------POST api to move data to finaltools table-----------
+
+// ------------------update api for bookmark_count------- in finaltools table------------------
+app.put("/bookmark_count_to_finaltools/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = 'UPDATE finaltools SET bookmark_count = IFNULL(bookmark_count, 0) + 1 WHERE final_id = ?';
+
+  con.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error("Error updating data in finaltools table:", err);
+      res.status(500).json({ success: false, error: "Internal Server Error" });
+    } else {
+      console.log(`Data with final ID ${id} updated in finaltools table successfully`);
+      res.status(200).json({ success: true });
+    }
+  });
+});
+// ------------------DELETE api to remove data from savetools table------------------
+app.delete("/savetools/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `DELETE FROM savetools WHERE save_id = ?`;
+
+  con.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error("Error deleting data from savetools table:", err);
+      res.status(500).json({ success: false, error: "Internal Server Error" });
+    } else {
+        console.log(`Data with ID ${id} deleted from savetools table successfully`);
+        res.status(200).json({ success: true });
+      }
+  });
+});
+
+// -------------------------------------POST api to move data to finaltools table--------from reviwtools---
 app.post("/finaltools", (req, res) => {
   const {
     reviw_id,
@@ -168,6 +215,49 @@ app.post("/finaltools", (req, res) => {
   con.query(sql, values, (err, result) => {
     if (err) {
       console.error("Error inserting data into finaltools table:", err);
+      res.status(500).json({ success: false, error: "Internal Server Error" });
+    } else {
+      console.log("Data inserted into finaltools table successfully");
+      res.status(200).json({ success: true });
+    }
+  });
+});
+// -------------------------------------POST api to move data to savetools table--------from finaltools---
+app.post("/savetools", (req, res) => {
+  const {
+    final_id,
+    tool_name,
+    tool_category,
+    tool_link,
+    tool_date,
+    tool_supported,
+    tool_price,
+    tool_logo,
+    main_image,
+    introduction,
+    description,
+    tags,
+  } = req.body;
+
+  const sql = `INSERT INTO savetools (save_id, tool_name, tool_category, tool_link, tool_date, tool_supported, tool_price, tool_logo, main_image, introduction, description, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const values = [
+    final_id,
+    tool_name,
+    tool_category,
+    tool_link,
+    tool_date,
+    tool_supported,
+    tool_price,
+    tool_logo,
+    main_image,
+    introduction,
+    description,
+    tags,
+  ];
+
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error inserting data into savetools table:", err);
       res.status(500).json({ success: false, error: "Internal Server Error" });
     } else {
       console.log("Data inserted into finaltools table successfully");

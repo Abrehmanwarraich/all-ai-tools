@@ -36,6 +36,7 @@ const Reviewtools = () => {
       await axios.post("http://localhost:3001/finaltools", dataItem);
       await axios.delete(`http://localhost:3001/reviewtools/${dataItem.reviw_id}`);
       setUploadedData(uploadedData.filter((item) => item.reviw_id !== dataItem.reviw_id));
+      alert("Your data succcessful uploaded");
     } catch (error) {
       console.error("Error posting data:", error);
     }
@@ -46,6 +47,7 @@ const Reviewtools = () => {
       await axios.delete(`http://localhost:3001/reviewtools/${id}`);
       const updatedData = uploadedData.filter((item) => item.reviw_id !== id);
       setUploadedData(updatedData);
+      alert("Your data succcessful deleted");
     } catch (error) {
       console.error("Error deleting review tool:", error);
     }
