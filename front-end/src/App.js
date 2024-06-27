@@ -17,9 +17,9 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='allcategory' element={<Allcategory/>}/>
         <Route path='submitaitools' element={<SubmitAiTools/>}/>
-        <Route path='Allahaakbar/submitaitools' element={<SubmitAiTools/>}/>
+        <Route path='admin/submitaitools' element={<SubmitAiTools/>}/>
         <Route path='saved' element={<Saved/>}/>
-        <Route path='Allahaakbar' element={<Reviewtools/>}/>
+        <Route path='admin' element={<Reviewtools/>}/>
         <Route path='toolprofile' element={<Toolprofile/>}/>
         
     

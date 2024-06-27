@@ -117,7 +117,7 @@ const SubmitAiTools = () => {
         Upload Tool And Share Your Innovation with the World.
       </h1>
       <h1 className="text-3xl font-bold mb-10 text-center underline underline-offset-8">
-        Submit a Tool
+        Submit Ai Tool
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -255,7 +255,6 @@ const SubmitAiTools = () => {
             required
           >
              <option value="disabled selected">Select Feature</option>
-            <option value="All">All</option>
             <option value="Chrome">Chrome</option>
             <option value="Android">Android</option>
             <option value="IOS">IOS</option>

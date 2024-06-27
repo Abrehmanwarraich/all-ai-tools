@@ -5,7 +5,6 @@ import { BsBrowserChrome } from "react-icons/bs";
 import { GoComment } from "react-icons/go";
 import { AiFillAndroid } from "react-icons/ai";
 import { FaApple } from "react-icons/fa6";
-import { SiChromatic } from "react-icons/si";
 import { SiOpenai } from "react-icons/si";
 import Footer from "./footer";
 import Searchbar from "./searchbar";
@@ -44,6 +43,7 @@ const Home = () => {
   const postTosaveTools = async (dataItem) => {
     try {
       await axios.post("http://localhost:3001/savetools", dataItem);
+      updateBookmarkCount(dataItem.final_id);
       alert("Your data successfully saved");
     } catch (error) {
       console.error("Error posting data:", error);
@@ -214,7 +214,6 @@ const Home = () => {
                         className="h-5 w-5 text-white hover:text-cyan-400 cursor-pointer"
                         onClick={() => {
                           postTosaveTools(dataItem);
-                          updateBookmarkCount(dataItem.final_id);
                         }}
                       />
                     </span>
@@ -222,38 +221,35 @@ const Home = () => {
                       <GoComment className="h-5 w-5 text-white hover:text-cyan-400 cursor-pointer" />
                     </span>
                     <span title="Share">
-                      <IoShareSocialOutline className="h-5 w-5 text-white hover:text-cyan-400 cursor-pointer" 
-                      onClick={() => {
-                        window.open('dataItem.tool_link', '_blank');
-                      }} 
-                      />
+                    <a  href = "dataItem.tool_link" target = "_blank" rel="noopener noreferrer">
+                      <IoShareSocialOutline
+                        className="h-5 w-5 text-white hover:text-cyan-400 cursor-pointer"
+                      /></a>
                     </span>
                     <span title="Visit">
                       <GoLinkExternal className="h-5 w-5 text-white hover:text-cyan-400 cursor-pointer" />
                     </span>
-                    <span >
-                      {
-                        (dataItem.tool_supported === "Android" ? (
-                          <span title="Android">
-                            {" "}
-                            <AiFillAndroid className="h-5 w-5  text-cyan-400 cursor-pointer" />
-                          </span>
-                        ) : (dataItem.tool_supported === "IOS") ? (
-                          <span title="IOS">
-                            <FaApple className="h-5 w-5  text-cyan-400 cursor-pointer" />
-                          </span>
-                        ) : (dataItem.tool_supported === "Chrome") ? (
-                          <span title="Chrome">
-                            {" "}
-                            <SiChromatic className="h-5 w-5  text-cyan-400 cursor-pointer" />
-                          </span>
-                        ) : (
-                          <span title="GPT">
-                            {" "}
-                            <SiOpenai className="h-5 w-5  text-cyan-400 cursor-pointer" />
-                          </span>
-                        ))
-                      }
+                    <span>
+                      {dataItem.tool_supported === "Android" ? (
+                        <span title="Android">
+                          {" "}
+                          <AiFillAndroid className="h-5 w-5  text-cyan-400 cursor-pointer" />
+                        </span>
+                      ) : dataItem.tool_supported === "IOS" ? (
+                        <span title="IOS">
+                          <FaApple className="h-5 w-5  text-cyan-400 cursor-pointer" />
+                        </span>
+                      ) : dataItem.tool_supported === "Chrome" ? (
+                        <span title="Chrome">
+                          {" "}
+                          <BsBrowserChrome className="h-5 w-5  text-cyan-400 cursor-pointer" />
+                        </span>
+                      ) : (
+                        <span title="GPT">
+                          {" "}
+                          <SiOpenai className="h-5 w-5  text-cyan-400 cursor-pointer" />
+                        </span>
+                      )}
                     </span>
                   </div>
                 </div>
